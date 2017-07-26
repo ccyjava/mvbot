@@ -68,7 +68,7 @@
         var story = parse_story(readTextFile("res/story.txt"));
 
         responseMesage = function(text){
-            var ret = "hehe";
+            var ret = "Got it";
             if(contextid != "" && step < story[contextid].length){               
                 ret = story[contextid][step];
                 step++;
@@ -88,6 +88,18 @@
                 uid=ret.slice(ret.indexOf("(")+1,ret.indexOf(")"));
                 ret=ret.slice(0,ret.indexOf("("));
                 changeSongById(uid);
+            }
+            if(ret.indexOf("[")!=-1 && ret.indexOf("]")!=-1){
+                suggest_txt=ret.slice(ret.indexOf("[")+1,ret.indexOf("]"));
+                ret=ret.slice(0,ret.indexOf("["));
+                var suggests = suggest_txt.split("|");
+                appendSuggestion(suggests);
+            }else{
+                var origintxt = '<span class = "popupele"><img src="./res/image/emoji-excit.png"></img>give me more suggestion</span>\
+                <span class = "popupele"><img src="./res/image/emoji-happy.png"></img>great</span>\
+                <span class = "popupele"><img src="./res/image/emoji-indifferent.png"></img>not my type</span>';
+                $(".popup").empty();
+                $(".popup").append(origintxt);
             }
 
             return ret;
@@ -129,14 +141,30 @@
                 }
             }
         });
-        $('.popupele').click(function(e) {
-            var id = this.id;
+        // $('.popupele').click(function(e) {
+        //     var txt = $(this).text();
+        //     setTimeout(function () {
+        //         return sendMessage(txt);
+        //     }, 0);
+        //     return setTimeout(function () {
+        //         return sendMessage(responseMesage(txt));
+        //     }, 1000);
+        // });
+
+        $(document).on('click', '.popupele', function(){
+            // what you want to happen when mouseover and mouseout 
+            // occurs on elements that match '.dosomething'
+            
+            var txt = $(this).text();
             setTimeout(function () {
-                return sendMessage(id);
+                return sendMessage(txt);
             }, 0);
+
+            
             return setTimeout(function () {
-                return sendMessage('Got it.');
+                return sendMessage(responseMesage(txt));
             }, 1000);
+
         });
         sendMessage('Hello Philip! :)');
         setTimeout(function () {
@@ -169,10 +197,25 @@
             changeSong(url);
         }
 
+        function genSuggest(txt) {
+            
+            return String.format('<span class = "popupele">{0}</span>',txt);
+        }
+
+        function appendSuggestion(arr) {
+            
+            $("#suggest_res").empty();
+            for(k in arr){
+                $("#suggest_res").append(genSuggest(arr[k]));
+            }
+        }
+
 
         $('.controlpause').click(function (e) {
             
-            changSong("https://www.youtube.com/embed/nfWlot6h_JM?autoplay=1&amp;enablejsapi=1&amp;origin=https://www.bing.com&amp;rel=0&amp;showinfo=0&amp;controls=0");
+            $("#suggest_res").empty();
+            $("#suggest_res").append(genSuggest("yes1"));
+            $("#suggest_res").append(genSuggest("yes2"));
         });
 
 
