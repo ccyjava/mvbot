@@ -24,6 +24,14 @@
             $message_input = $('.message_input');
             return $message_input.val();
         };
+
+        String.format = function(src){
+            if (arguments.length == 0) return null;
+            var args = Array.prototype.slice.call(arguments, 1);
+            return src.replace(/\{(\d+)\}/g, function(m, i){
+                return args[i];
+            });
+        };
         function readTextFile(file)
         {
             var rawFile = new XMLHttpRequest();
@@ -76,6 +84,12 @@
                     }
                 }
             }
+            if(ret.indexOf("(")!=-1 && ret.indexOf(")")!=-1){
+                uid=ret.slice(ret.indexOf("(")+1,ret.indexOf(")"));
+                ret=ret.slice(0,ret.indexOf("("));
+                changeSongById(uid);
+            }
+
             return ret;
         };
 
@@ -123,7 +137,7 @@
             return setTimeout(function () {
                 return sendMessage('Got it.');
             }, 1000);
-            });
+        });
         sendMessage('Hello Philip! :)');
         setTimeout(function () {
             return sendMessage('Hi Sandy! How are you?');
@@ -135,37 +149,33 @@
 
 
         //======
-         var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '227.5',
-          width: '400',
-          videoId: 'M7lc1UVf-VE',
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-      }
-
-      // 4. The API will call this function when the video player is ready.
-      function onPlayerReady(event) {
-        event.target.playVideo();
-      }
-
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-      var done = false;
-      function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
+        var player;
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player('_ytplayer1610', {
+            events: {
+              'onStateChange': onPlayerStateChange
+            }
+          });
         }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
+
+        function changeSong(url) {
+            
+            $("#_ytplayer1610").attr('src',url);
+        }
+
+        function changeSongById(uid){
+            template = "https://www.youtube.com/embed/{0}?autoplay=1&amp;enablejsapi=1&amp;origin=https://www.bing.com&amp;rel=0&amp;showinfo=0&amp;controls=0"
+            url = String.format(template,uid);
+            changeSong(url);
+        }
+
+
+        $('.controlpause').click(function (e) {
+            
+            changSong("https://www.youtube.com/embed/nfWlot6h_JM?autoplay=1&amp;enablejsapi=1&amp;origin=https://www.bing.com&amp;rel=0&amp;showinfo=0&amp;controls=0");
+        });
+
+
         //==
     });
 }.call(this));
