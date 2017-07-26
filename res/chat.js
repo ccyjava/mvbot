@@ -115,7 +115,15 @@
                 }
             }
         });
-
+        $('.popupele').click(function(e) {
+            var id = this.id;
+            setTimeout(function () {
+                return sendMessage(id);
+            }, 0);
+            return setTimeout(function () {
+                return sendMessage('Got it.');
+            }, 1000);
+            });
         sendMessage('Hello Philip! :)');
         setTimeout(function () {
             return sendMessage('Hi Sandy! How are you?');
