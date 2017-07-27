@@ -1,14 +1,16 @@
-music	I Guess you are a engineer,aren't you?[yes|no,I am PM|no,I am designer]	Great,Let's play the music of engineer(wKzMlkKNodA)
-song	What's your feeling now?[happy|sad|just so so]	ok,relax,let's listen this one (lY-7cYMVQ2A)
-	this music is publish in 1998,it become best seller as soon as it release,you could try whole album[yes,try it:)|no thanks:(]
-yes,try it:)	let's listen this one (http://)
-it's rain	raining day better listen some happy music!
-no thanks:(	:)
+music	I Guess you are a engineer,aren't you?[yes|no,I am PM|no,I am designer]	Great,Let's play the music of YOU(34FFeyhZsLw)
+song	What's your feeling now?[happy|sad|just so so]	ok,relax,let's listen this one (elsh3J5lJ6g)
+like	this music is publish in 1998,it become best seller as soon as it release,you could try whole album[yes,try it|no thanks]
+yes,try it	let's listen this one (i3u0vq0WyIA)
+rain	raining day better listen some happy music!(XmQuIsDnQ3k)
+no thanks	:)
 	What's your feeling now?[happy|sad|just so so]	ok,relax,let's listen this one (http://)
 hello	hello	nice to meet you!	do you like to listen some music	aha,let play one
 tylor	tylor's song(o4Yzj-m_SBk)
-relax	give you some relax music!(Mx6xkyi5Ij8)
-energy	wow,let rock it!(lwk5OUII9Vc)
-i feel bad	don't worry, let's have a rest(hUdAglzSHxc)
-work	let's enjoy a soft jazz(wKzMlkKNodA)
-sb	me too!(xMO5fQv8FPc)
+relax	give you some relax music!(EhO_MrRfftU)
+energy	wow,let rock it!(TxWLybPwBzs)
+i feel bad	don't worry, let's have a rest(BZsXcc_tC)
+work	let's enjoy a soft jazz(i3u0vq0WyIA)
+sb	me too!(BZsXcc_tC-o)
+sad	this music maybe help you(mF3DCa4TbD0)
+random	suprise(*)

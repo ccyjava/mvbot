@@ -18,6 +18,7 @@
     };
     $(function () {
         var getMessageText, sendMessage;
+        var music_list= ['XmQuIsDnQ3k','i3u0vq0WyIA','mF3DCa4TbD0'];
         getMessageText = function () {
             var $message_input;
             $message_input = $('.message_input');
@@ -31,6 +32,11 @@
                 return args[i];
             });
         };
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
         function readTextFile(file)
         {
             var rawFile = new XMLHttpRequest();
@@ -85,6 +91,9 @@
             }
             if(ret.indexOf("(")!=-1 && ret.indexOf(")")!=-1){
                 uid=ret.slice(ret.indexOf("(")+1,ret.indexOf(")"));
+                if(uid == "*"){
+                    uid = music_list[getRandomInt(0,music_list.length-1)]
+                }
                 ret=ret.slice(0,ret.indexOf("("));
                 changeSongById(uid);
             }
