@@ -17,8 +17,7 @@
         return this;
     };
     $(function () {
-        var getMessageText, message_side, sendMessage;
-        message_side = 'right';
+        var getMessageText, sendMessage;
         getMessageText = function () {
             var $message_input;
             $message_input = $('.message_input');
@@ -105,14 +104,14 @@
             return ret;
         };
 
-        sendMessage = function (text) {
+        sendMessage = function (text,message_side='right') {
             var $messages, message;
             if (text.trim() === '') {
                 return;
             }
             $('.message_input').val('');
             $messages = $('.messages');
-            message_side = message_side === 'left' ? 'right' : 'left';
+            //message_side = message_side === 'left' ? 'right' : 'left';
             message = new Message({
                 text: text,
                 message_side: message_side
@@ -121,24 +120,26 @@
             $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 300);
             return message_side;
         };
+
+
         $('.send_message').click(function (e) {
             var msgtxt = getMessageText();
-            if(sendMessage(msgtxt) == 'right'){
-                setTimeout(function () {
-                    return sendMessage(responseMesage(msgtxt));
-                }, 1000);
-            }
+            sendMessage(msgtxt)
+            setTimeout(function () {
+                return sendMessage(responseMesage(msgtxt),'left');
+            }, 1000);
+            
         });
 
 
         $('.message_input').keyup(function (e) {
             if (e.which === 13) {
                 var msgtxt = getMessageText();
-                if(sendMessage(msgtxt) == 'right'){
-                    setTimeout(function () {
-                        return sendMessage(responseMesage(msgtxt));
-                    }, 1000);
-                }
+                sendMessage(msgtxt)
+                setTimeout(function () {
+                    return sendMessage(responseMesage(msgtxt),'left');
+                }, 1000);
+                
             }
         });
         // $('.popupele').click(function(e) {
@@ -152,27 +153,26 @@
         // });
 
         $(document).on('click', '.popupele', function(){
-            // what you want to happen when mouseover and mouseout 
-            // occurs on elements that match '.dosomething'
             
             var txt = $(this).text();
-            setTimeout(function () {
-                return sendMessage(txt);
-            }, 0);
+            
+            sendMessage(txt);
+            
 
             
             return setTimeout(function () {
-                return sendMessage(responseMesage(txt));
+                return sendMessage(responseMesage(txt),'left');
             }, 1000);
 
         });
-        sendMessage('Hello Philip! :)');
+
+        sendMessage('Hello Handsome! :)','left');
         setTimeout(function () {
-            return sendMessage('Hi Sandy! How are you?');
+            return sendMessage('Hi Boya! How are you?');
         }, 1000);
 
         setTimeout(function () {
-            return sendMessage('I\'m fine, thank you!');
+            return sendMessage('I\'m fine, thank you!','left');
         }, 2000);
 
 
